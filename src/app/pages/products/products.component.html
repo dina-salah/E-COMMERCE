@@ -1,0 +1,56 @@
+<section class="pb-4">
+  <div class="max-w-lg mx-auto">
+      <h2 class="py-5 text-3xl text-center">Our products</h2>
+
+      <label for="default-search"
+          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+      <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+          </div>
+          <input [(ngModel)]="searchBar" type="search" id="default-search"
+              class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search Mockups, Logos..." required />
+          <button type="submit"
+              class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+      </div>
+  </div>
+
+</section>
+
+<section class="text-center">
+
+  <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 text-start">
+      @for (prod of productsData |search:searchBar; track prod.id) {
+      <div class="card border border-gray-400 rounded-md overflow-hidden shadow">
+          <div  >
+              <div class="img-card" [routerLink]="['/details/',prod.id]">
+                  <img [src]="prod.imageCover" class="w-full h-[250px] object-contain" [alt]="prod.title" />
+              </div>
+              <div class="card-body p-2">
+                  <div class="flex justify-between">
+                    <h4 class="text-green-500 capitalize">{{prod.category.name}}</h4>
+                  
+                    <button (click)="addToWishList(prod.id)" >
+                        <i  class="fa-solid fa-heart text-2xl" [class]="{'text-red-500': isProductInWishList(prod.id)}"></i>
+                    </button>
+                  </div>
+                  <h3 class="capitalize">{{prod.title.split(' ')| slice:0:2| join:' ' }}</h3>
+                  <div class="flex justify-between">
+                      <p>{{prod.price| currency:'GBP' }}</p>
+                      <div class="flex items-center">
+                          <i class="fa-solid fa-star text-yellow-400"></i>
+                          <p>{{prod.ratingsAverage}}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <button (click)="addProduct(prod.id)" class="btn bg-green-500 w-full p-2 text-white">Add to cart</button>
+      </div>
+      }
+  </div>
+</section>

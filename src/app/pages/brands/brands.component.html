@@ -1,0 +1,17 @@
+<section class="text-center">
+    <h2 class="text-green-600 text-center text-6xl my-10">All Brands</h2>
+    <div class="grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-start">
+        @for (brand of brandsData; track brand._id) {
+        <div class="card border border-gray-300 rounded-md overflow-hidden shadow hover:shadow-md hover:shadow-green-200 transition-all duration-700">
+            <div>
+                <div class="img-card">
+                    <img [src]="brand.image" class="w-full h-[250px] object-contain" [alt]="brand.name" />
+                </div>
+                <div class="card-body p-5">
+                    <h4 class="text-2xl text-center text-green-600 capitalize">{{brand.name}}</h4>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+  </section>

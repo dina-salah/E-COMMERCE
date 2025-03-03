@@ -1,0 +1,39 @@
+<section >
+        <div class="card  rounded-md overflow-hidden pb-3">
+            <div class="flex justify-start items-center">
+                <div class="img-card">
+                    <img [src]="itemDetails.imageCover" class="w-full h-[250px] object-contain" [alt]="itemDetails.title" />
+                    <div class="flex justify-between">
+                        <p>{{itemDetails.price |currency:'GBP'}}</p>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <p>{{itemDetails.ratingsAverage}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-2">
+                    <h4 class="text-green-500 capitalize text-xl">{{itemDetails.category.name}}</h4>
+                    <h3 class="capitalize text-xl">{{itemDetails.title}}</h3>
+                    <p class="text-sm text-gray-700">{{itemDetails.description }}</p>
+                    <button class="btn bg-green-500 w-full p-2 text-white my-5" >Add to cart</button>
+
+                  
+                </div>
+            </div>
+        </div>
+        <hr>
+       <div class="py-8">
+        <h5 class="capitalize text-lg">reviews:</h5>
+       @if(itemDetails.reviews.length == 0  ){
+        <p class="text-lg text-gray-700 py-5 text-center">No reviwes yet !</p>
+        
+      
+       }@else{
+
+        @for(rev of itemDetails.reviews ; track $index){
+
+            <p class="text-sm text-gray-700">{{ rev }}</p>
+        }
+       }
+       </div>
+</section>

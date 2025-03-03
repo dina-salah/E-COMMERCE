@@ -1,0 +1,38 @@
+<section>
+    <div class="bg-gray-100 w-[75%] rounded p-8 mx-auto">
+        <h2 class="text-green-600 text-3xl  text-center">My Cart:</h2>
+       
+        @if (cartDetails.totalCartPrice) {
+            <div class="flex justify-between">
+            <h3 class="text-green-500">Total cart price: {{cartDetails.totalCartPrice | currency:'GBP' }}</h3>
+            <button (click)="clearCart()" class="bg-yellow-500 p-3 rounded text-sm"><i class="fa-solid fa-trash-can"></i> Clear cart</button>
+
+            </div>
+        @for ( i of cartDetails.products ; track i.product._id) {
+            <div class="flex justify-between my-2 border-b-2 pb-2">
+                <div class="flex justify-start">
+                    <img [src]="i.product.imageCover" class="w-[150px] h-[150px] object-contain" [alt]="i.product.title">
+                    <div>
+                        <h4>{{i.product.category.name}}</h4>
+                        <h4>{{i.product.title}}</h4>
+                        <h4>{{i.price | currency:'GBP'}}</h4>
+                    <button (click)="removeItem(i.product.id)" class="text-red-600 text-sm"><i class="fa-solid fa-trash-can"></i> Remove</button>
+
+                    </div>
+                </div>
+                <div class="flex items-center justify-between w-[50px]">
+                    <button (click)="updateQty(i.product._id, i.count - 1)" class="text-green-600 text-lg"><i class="fa-regular fa-square-minus"></i></button>
+                    <span> {{i.count}} </span>
+                    <button  (click)="updateQty(i.product._id, i.count + 1)" class="text-green-600 text-lg"><i class="fa-regular fa-square-plus "></i></button>
+                </div>
+            </div>
+        }
+
+        <button [routerLink]="['/checkout', cartDetails._id]" class="btn-main text-white">Checkout</button>
+        }@else {
+            <div>
+                <p class=" text-gray-800 text-center  py-10">Your cart is empty!</p>
+            </div>
+        }
+    </div>
+</section>
