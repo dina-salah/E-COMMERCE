@@ -16,7 +16,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite(flowbite => {
-    
       
     });
 
